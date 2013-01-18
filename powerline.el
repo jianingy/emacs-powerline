@@ -17,14 +17,23 @@
 
 (defvar powerline-color1)
 (defvar powerline-color2)
+(defvar powerline-color3)
+(defvar powerline-color3-alt)
+(defvar powerline-color4)
 
-(setq powerline-color1 "grey22")
-(setq powerline-color2 "grey40")
+(setq powerline-color1 "grey15")
+(setq powerline-color2 "grey20")
+(setq powerline-color3 "firebrick3")
+(setq powerline-color4 "grey25")
+(setq powerline-color3-alt "OliveDrab1")
 
 (set-face-attribute 'mode-line nil
-                    :background "OliveDrab3"
+                    :background "orange"
+                    :foreground "grey11"
                     :box nil)
 (set-face-attribute 'mode-line-inactive nil
+                    :background "grey5"
+                    :foreground "grey70"
                     :box nil)
 
 (if (functionp 'scroll-bar-mode)
@@ -530,6 +539,10 @@ install the memoized function over the original function."
                                           (setq pmax (point-max))
                                           (setq pmin (point-min)))
                                         (percent-xpm pmax pmin we ws 15 color1 color2))))
+(defpowerline org-task
+  (if org-clock-current-task
+      (propertize (concat " Clock:" org-clock-current-task) 'face (powerline-make-face color1))
+    (propertize "Clock: off" 'face '(:foreground "grey20"))))
 
 (setq-default mode-line-format
               (list "%e"
@@ -537,15 +550,36 @@ install the memoized function over the original function."
                              (powerline-rmw            'left   nil  )
                              (powerline-buffer-id      'left   nil  powerline-color1  )
                              (powerline-major-mode     'left        powerline-color1  )
-                             (powerline-minor-modes    'left        powerline-color1  )
-                             (powerline-narrow         'left        powerline-color1  powerline-color2  )
-                             (powerline-vc             'center                        powerline-color2  )
-                             (powerline-make-fill                                     powerline-color2  )
-                             (powerline-row            'right       powerline-color1  powerline-color2  )
+                             (powerline-minor-modes    'left        powerline-color1  )))
+
+                    '(:eval (when vc-mode
+                                (concat
+                                 (powerline-narrow         'left        powerline-color1  powerline-color2  )
+                                 (powerline-vc             'center                        powerline-color2  ))))
+
+                    '(:eval (concat
+                             (powerline-narrow  'left
+                                                (if vc-mode powerline-color2 powerline-color1)
+                                                (if org-clock-current-task powerline-color3 powerline-color3-alt))))
+
+                    '(:eval (if org-clock-current-task
+                                (concat
+                                 (powerline-org-task   'center      powerline-color3  )
+                                 (powerline-narrow         'left        powerline-color3  powerline-color4  ))
+                              (concat
+                               (powerline-org-task     'center      powerline-color3-alt  )
+                               (powerline-narrow         'left        powerline-color3-alt  powerline-color4  ))))
+
+                     '(:eval (concat
+                              (powerline-make-fill               powerline-color4  )
+                              (powerline-row          'right       powerline-color1  powerline-color4  )))
+
+
+                    '(:eval (concat
                              (powerline-make-text      ":"          powerline-color1  )
                              (powerline-column         'right       powerline-color1  )
                              (powerline-percent        'right  nil  powerline-color1  )
-                             (powerline-make-text      "  "    nil  )))))
+                             (powerline-make-text      "  "    nil )))))
 
 (provide 'powerline)
 
