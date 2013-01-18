@@ -23,9 +23,9 @@
 
 (setq powerline-color1 "grey15")
 (setq powerline-color2 "grey20")
-(setq powerline-color3 "firebrick3")
+(setq powerline-color3 "grey25")
 (setq powerline-color4 "grey25")
-(setq powerline-color3-alt "OliveDrab1")
+(setq powerline-color3-alt "firebrick3")
 
 (set-face-attribute 'mode-line nil
                     :background "orange"
