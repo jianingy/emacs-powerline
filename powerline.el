@@ -33,7 +33,7 @@
                     :box nil)
 (set-face-attribute 'mode-line-inactive nil
                     :background "grey5"
-                    :foreground "grey70"
+                    :foreground "orange"
                     :box nil)
 
 (if (functionp 'scroll-bar-mode)
