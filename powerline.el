@@ -25,16 +25,16 @@
 (setq powerline-color2 "grey20")
 (setq powerline-color3 "grey25")
 (setq powerline-color4 "grey25")
-(setq powerline-color3-alt "firebrick3")
+(setq powerline-color3-alt "#c82829")
 
-(set-face-attribute 'mode-line nil
-                    :background "orange"
-                    :foreground "grey11"
-                    :box nil)
-(set-face-attribute 'mode-line-inactive nil
-                    :background "grey5"
-                    :foreground "orange"
-                    :box nil)
+;; (set-face-attribute 'mode-line nil
+;;                     :background "#de935f"
+;;                     :foreground "grey11"
+;;                     :box nil)
+;; (set-face-attribute 'mode-line-inactive nil
+;;                     :background "grey5"
+;;                     :foreground "#de935f"
+;;                     :box nil)
 
 (if (functionp 'scroll-bar-mode)
     (scroll-bar-mode -1))
