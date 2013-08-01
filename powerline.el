@@ -541,7 +541,7 @@ install the memoized function over the original function."
                                         (percent-xpm pmax pmin we ws 15 color1 color2))))
 (defpowerline org-task
   (if org-clock-current-task
-      (propertize (concat " Clock:" org-clock-current-task) 'face (powerline-make-face color1))
+      (propertize (concat " " (org-clock-get-clock-string)) 'face (powerline-make-face color1))
     (propertize "Clock: off" 'face '(:foreground "grey20"))))
 
 (setq-default mode-line-format
